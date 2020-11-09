@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 
 import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
 
+import BarcodeScanner from '../components/BarcodeScanner'
+
 
 export default class ScannerScreen extends Component {
 
@@ -19,6 +21,7 @@ export default class ScannerScreen extends Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text category='h1'>Scanner</Text>
+          <BarcodeScanner/>
         </Layout>
       </SafeAreaView>
     )
