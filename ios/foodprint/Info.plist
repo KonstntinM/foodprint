@@ -23,6 +23,8 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera to enable you to scan barcodes of your food.</string>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
