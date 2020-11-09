@@ -9,7 +9,7 @@ const baseUrl = "https://world.openfoodfacts.org/api/v0";
 //  
 //  More informations can be found on https://de.openfoodfacts.org/data 
 
-import Product from '../services/model/Product';
+import Product from './models/Product';
 
 export default {
     getProductByBarcode 
