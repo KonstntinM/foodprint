@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
 
 
-export default class ScannerScreen extends Component {
+export default class HistoryScan extends Component {
 
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ export default class ScannerScreen extends Component {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text category='h1'>Scanner</Text>
+          <Text category='h1'>History</Text>
         </Layout>
       </SafeAreaView>
     )
