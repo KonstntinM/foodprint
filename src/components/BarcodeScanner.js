@@ -8,14 +8,6 @@ import openFoodFacts from '../services/openFoodFacts'
 
 export default class BarcodeScan extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            torchOn: true,
-            barcodeScanned: false
-        }
-    }
-
     onBarCodeRead = (barcode) => {
 
         if (this.state.barcodeScanned) {
@@ -42,7 +34,6 @@ export default class BarcodeScan extends Component {
 
         return (
             <View style={styles.container}>
-                <Text class="divider_text">BarcodeScanner</Text> 
                 <View style={styles.cameraWrapper}>
                     <RNCamera
                         ref={ref => {

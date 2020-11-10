@@ -6,14 +6,6 @@ import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, SafeAreaView } f
 
 export default class HistoryScan extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      torchOn: true,
-      barcodeScanned: false
-    }
-  }
-
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
