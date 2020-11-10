@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-import { AppRegistry, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+
 import { RNCamera } from 'react-native-camera';
 
 import openFoodFacts from '../services/openFoodFacts'
 
-export default class BarcodeScan extends Component { 
+export default class BarcodeScan extends Component {
 
     constructor(props) {
         super(props);
@@ -38,13 +39,15 @@ export default class BarcodeScan extends Component {
     }
 
     render() {
+
         return (
             <View style={styles.container}>
+                <Text class="divider_text">BarcodeScanner</Text>
                 <RNCamera
                     ref={ref => {
                         this.camera = ref;
                     }}
-                    style={styles.preview}
+                    style={styles.cameraView}
                     type={RNCamera.Constants.Type.back}
                     flashMode={RNCamera.Constants.FlashMode.auto}
                     androidCameraPermissionOptions={{
@@ -63,7 +66,9 @@ export default class BarcodeScan extends Component {
                         this.onBarCodeRead(barcodes)
                     }}
                     captureAudio={false}
-                />
+                >
+                
+                </RNCamera>
             </View>
         )
     }
@@ -72,12 +77,9 @@ export default class BarcodeScan extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'black',
-    },
-    preview: {
+      },
+      cameraView: {
         flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
+        justifyContent: 'flex-start',
+      }
 });
