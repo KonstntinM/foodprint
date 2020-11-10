@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Dimensions, Image } from 'react-native';
 
 import { RNCamera } from 'react-native-camera';
 
@@ -43,43 +43,54 @@ export default class BarcodeScan extends Component {
         return (
             <View style={styles.container}>
                 <Text class="divider_text">BarcodeScanner</Text>
-                <RNCamera
-                    ref={ref => {
-                        this.camera = ref;
-                    }}
-                    style={styles.cameraView}
-                    type={RNCamera.Constants.Type.back}
-                    flashMode={RNCamera.Constants.FlashMode.auto}
-                    androidCameraPermissionOptions={{
-                        title: 'Permission to use camera',
-                        message: 'We need your permission to use your camera',
-                        buttonPositive: 'Ok',
-                        buttonNegative: 'Cancel',
-                    }}
-                    androidRecordAudioPermissionOptions={{
-                        title: 'Permission to use audio recording',
-                        message: 'We need your permission to use your audio',
-                        buttonPositive: 'Ok',
-                        buttonNegative: 'Cancel',
-                    }}
-                    onGoogleVisionBarcodesDetected={({ barcodes }) => {
-                        this.onBarCodeRead(barcodes)
-                    }}
-                    captureAudio={false}
-                >
-                
-                </RNCamera>
+                <View style={styles.cameraWrapper}>
+                    <RNCamera
+                        ref={ref => {
+                            this.camera = ref;
+                        }}
+                        style={styles.cameraView}
+                        type={RNCamera.Constants.Type.back}
+                        flashMode={RNCamera.Constants.FlashMode.auto}
+                        androidCameraPermissionOptions={{
+                            title: 'Permission to use camera',
+                            message: 'We need your permission to use your camera',
+                            buttonPositive: 'Ok',
+                            buttonNegative: 'Cancel',
+                        }}
+                        androidRecordAudioPermissionOptions={{
+                            title: 'Permission to use audio recording',
+                            message: 'We need your permission to use your audio',
+                            buttonPositive: 'Ok',
+                            buttonNegative: 'Cancel',
+                        }}
+                        onGoogleVisionBarcodesDetected={({ barcodes }) => {
+                            this.onBarCodeRead(barcodes)
+                        }}
+                        captureAudio={false}
+                    >
+                        <Image style={styles.borderImage} source={require("./qrBorder.png")} />
+                    </RNCamera>
+                </View>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+
+    // Styles from https://stackoverflow.com/questions/45518740/how-can-i-add-a-border-frame-in-the-camera
+
     container: {
         flex: 1,
-      },
-      cameraView: {
-        flex: 1,
-        justifyContent: 'flex-start',
-      }
+    },
+    cameraWrapper: {
+        height: 240,
+        width: 240,
+        borderRadius: 120,
+        overflow: 'hidden'
+    },
+    cameraView: {
+        height: 240,
+        width: 240
+    }
 });
