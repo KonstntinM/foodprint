@@ -8,8 +8,8 @@ export default class HistoryScan extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <SafeAreaView style={styles.container}>
+        <Layout style={styles.body}>
           <Text category='h1'>History</Text>
         </Layout>
       </SafeAreaView>
@@ -19,13 +19,11 @@ export default class HistoryScan extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'black',
+    flex: 1
   },
-  preview: {
+  body: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
