@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     headerText: {
         margin: 30,
         textAlign: 'center',
-        fontSize: 25
+        fontSize: 25,
+        fontFamily: 'Roboto-Light'
     }
   });

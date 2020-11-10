@@ -13,7 +13,7 @@ export default class ScannerScreen extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
         <Header/>
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
           <BarcodeScanner style={styles.scanner} />
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   scanner: {
     marginTop: 10
