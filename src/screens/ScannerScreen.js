@@ -23,7 +23,6 @@ export default class ScannerScreen extends Component {
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text category='h1'>Scanner</Text>
           <BarcodeScanner class="scanner" />
-          <Text>TestiTesti1234</Text>
         </Layout>
       </SafeAreaView>
     )

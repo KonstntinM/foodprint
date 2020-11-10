@@ -42,7 +42,7 @@ export default class BarcodeScan extends Component {
 
         return (
             <View style={styles.container}>
-                <Text class="divider_text">BarcodeScanner</Text>
+                <Text class="divider_text">BarcodeScanner</Text> 
                 <View style={styles.cameraWrapper}>
                     <RNCamera
                         ref={ref => {
@@ -68,7 +68,7 @@ export default class BarcodeScan extends Component {
                         }}
                         captureAudio={false}
                     >
-                        <Image style={styles.borderImage} source={require("./qrBorder.png")} />
+                        <Image style={styles.borderImage} source={require("../../assets/img/QR-Circle.png")} />
                     </RNCamera>
                 </View>
             </View>
@@ -90,6 +90,11 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     cameraView: {
+        height: 240,
+        width: 240,
+        alignContent: 'center'
+    },
+    borderImage: {
         height: 240,
         width: 240
     }
