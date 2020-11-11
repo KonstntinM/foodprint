@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
         margin: 30,
         textAlign: 'center',
         fontSize: 25,
-        fontFamily: 'Roboto-Light'
+        fontFamily: 'Roboto-Medium'
     }
   });
