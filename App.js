@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -29,14 +29,50 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from './src/navigator';
 import * as eva from '@eva-design/eva';
 
-export default ({ navigation }) => (
-  <>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <AppNavigator />
-    </ApplicationProvider>
-  </>
-);
+const Realm = require('realm');
+
+import CategorySchema from './src/storage/schemas/CategorySchema'
+import PackageSchema from './src/storage/schemas/PackageSchema'
+
+export default class foodprint extends Component {
+
+  // setting up the local database (realm.js)
+
+  constructor (props) {
+    super(props);
+    this.state = { realm: null };
+  }
+
+  componentDidMount() {
+    Realm.open({
+      schema: [{ schema: [CategorySchema, PackageSchema] }]
+    }).then(realm => {
+      this.setState({ realm });
+    });
+  }
+
+  componentWillUnmount() {
+    // Close the realm if there is one open.
+    const { realm } = this.state;
+    if (realm !== null && !realm.isClosed) {
+      realm.close();
+    }
+  }
+
+  // render the app
+
+  render() {
+
+    return (
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <AppNavigator />
+        </ApplicationProvider>
+      </>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   scrollView: {
