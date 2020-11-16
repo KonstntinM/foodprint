@@ -31,21 +31,22 @@ import * as eva from '@eva-design/eva';
 
 const Realm = require('realm');
 
-import CategorySchema from './src/storage/schemas/CategorySchema'
+import IngredientSchema from './src/storage/schemas/IngredientSchema'
 import PackageSchema from './src/storage/schemas/PackageSchema'
 
 export default class foodprint extends Component {
 
   // setting up the local database (realm.js)
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = { realm: null };
   }
 
   componentDidMount() {
+
     Realm.open({
-      schema: [{ schema: [CategorySchema, PackageSchema] }]
+      schema: [IngredientSchema, PackageSchema]
     }).then(realm => {
       this.setState({ realm });
     });
