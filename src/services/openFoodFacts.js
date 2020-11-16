@@ -41,4 +41,6 @@ async function getProductByBarcode (barcode) {
 
     var product = new Product(response.product)
     console.debug("Our newly created product is " + JSON.stringify(product));
+
+    return product
 }

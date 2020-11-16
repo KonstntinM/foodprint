@@ -44,7 +44,6 @@ export default class foodprint extends Component {
   }
 
   componentDidMount() {
-
     Realm.open({
       schema: [IngredientSchema, PackageSchema]
     }).then(realm => {

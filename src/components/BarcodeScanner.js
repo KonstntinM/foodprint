@@ -5,6 +5,7 @@ import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Dimensions, Imag
 import { RNCamera } from 'react-native-camera';
 
 import openFoodFacts from '../services/openFoodFacts'
+import barcodeHandler from '../handlers/barcodeHandler'
 
 export default class BarcodeScan extends Component {
 
@@ -22,8 +23,7 @@ export default class BarcodeScan extends Component {
             return [] // If the Barecode isn't of an EAN type, the process will be stopped
         }
 
-        const barcodeData = barcode[0].data
-        openFoodFacts.getProductByBarcode(barcodeData)
+        barcodeHandler(barcode)
     }
 
     restartBarCode = () => {

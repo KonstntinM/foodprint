@@ -37,10 +37,14 @@ export default class Product {
     }
 
     calculateFootprint () {
+        console.debug("The method calculateFootprint() was called.")
+
         // TODO Check wether or not the product has a fixed footprint
 
         // calculate
         let score
+
+        this.convertCategories()
         
         // add categorie values
         for (category in this.categories) {
@@ -52,6 +56,8 @@ export default class Product {
             score = score + package.value;
         }
 
+        console.debug("The score is", score, ".")
+
         this.score = score
         return this.score
     }
@@ -60,6 +66,9 @@ export default class Product {
      * Converts the attached categoryIds into category objects.
      */
     convertCategories () {
+
+        console.debug("Converting categories...")
+
         for (category in this.categories) {
             // check wether or not its already converted
             if (!(category instanceof String)) continue
@@ -68,5 +77,7 @@ export default class Product {
 
             category = categoryObj
         }
+
+        console.debug("Converting finished!")
     }
 }
