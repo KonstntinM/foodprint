@@ -36,12 +36,7 @@ export default class Product {
         console.debug("The Product was created. The name of the Product is " + this.name);
     }
 
-    sayHi() {
-        console.log("Say 'Hi' to our new Friend", this.name, "!");
-    }
-
     calculateFootprint () {
-        console.debug("The method calculateFootprint() was called.")
 
         // TODO Check wether or not the product has a fixed footprint
 
@@ -63,7 +58,7 @@ export default class Product {
         //    score = score + packaging.value;
         //}
 
-        console.debug("The score is", score, ".")
+        console.log("The Foodprint of the product is", score)
 
         this.score = score
         return this.score
@@ -77,13 +72,10 @@ export default class Product {
         console.debug("Converting categories...");
 
         for (i in this.ingredients) {
-            console.log("The ingredient is", this.ingredients[i]);
             // check wether or not its already converted
             if (this.ingredients[i] instanceof String) continue
 
             let ingredientObj = Ingredient.getIngredientById(this.ingredients[i])
-            console.log("The ingredient Object is", JSON.stringify(ingredientObj));
-
             this.ingredients[i] = ingredientObj
         }
 

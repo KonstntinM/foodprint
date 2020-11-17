@@ -11,9 +11,7 @@ export default async function (barcode) {
     const barcodeData = barcode[0].data
     const product = await openFoodFacts.getProductByBarcode(barcodeData);
 
-    console.info("The Product that the barcode handler recived is", JSON.stringify(product))
-
     await product.calculateFootprint()
 
-    console.log("The Foodprint of the product is", product.score)
+    console.debug("The final Product is", JSON.stringify(product))
 }
