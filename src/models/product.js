@@ -1,4 +1,4 @@
-import Category from '../storage/CategoryHandler'
+import Ingredient from '../storage/IngredientHandler'
 
 //  This Product Object represents a scanned product, whos product informations were called from the openFoodFacts api.
 //  Lateron the carbon footprint will be attached to this object. 
@@ -11,12 +11,12 @@ export default class Product {
 
         console.debug("A new Product will be created! The recived data is " + JSON.stringify(productData));
 
-        this.name = productData.product_name
-        this.barcode = productData.code
-        this.image = productData.image_front_url
-        this.ingredients = productData.ingredients_tags
-        this.packaging = productData.packaging_tags
-        this.categories = productData.categories_hierarchy
+        this.name = productData.product_name;
+        this.barcode = productData.code;
+        this.image = productData.image_front_url;
+        this.ingredients = productData.ingredients_tags;
+        this.packaging = productData.packaging_tags;
+        this.categories = productData.categories_hierarchy;
 
         // restructuring some values, so they will be easyer to process
 
@@ -30,10 +30,14 @@ export default class Product {
         // }
 
         if ((!this.image.includes("https")) && this.image.includes("http")) {
-            this.image.replace("http", "https")
+            this.image.replace("http", "https");
         }
 
         console.debug("The Product was created. The name of the Product is " + this.name);
+    }
+
+    sayHi() {
+        console.log("Say 'Hi' to our new Friend", this.name, "!");
     }
 
     calculateFootprint () {
@@ -42,19 +46,22 @@ export default class Product {
         // TODO Check wether or not the product has a fixed footprint
 
         // calculate
-        let score
+        let score = 0;
 
-        this.convertCategories()
+        console.log(score);
+
+        this.convertIngredients()
         
         // add categorie values
-        for (category in this.categories) {
-            score = score + category.value;
+        for (i in this.ingredients) {
+            console.log(JSON.stringify(this.ingredients[i]), score);
+            score = score + this.ingredients[i].value;
         }
 
         // add packaging values
-        for (package in this.packaging) {
-            score = score + package.value;
-        }
+        //for (packaging in this.packaging) {
+        //    score = score + packaging.value;
+        //}
 
         console.debug("The score is", score, ".")
 
@@ -63,19 +70,21 @@ export default class Product {
     }
 
     /**
-     * Converts the attached categoryIds into category objects.
+     * Converts the attached categoryIds into category objects. 
      */
-    convertCategories () {
+    convertIngredients () {
 
-        console.debug("Converting categories...")
+        console.debug("Converting categories...");
 
-        for (category in this.categories) {
+        for (i in this.ingredients) {
+            console.log("The ingredient is", this.ingredients[i]);
             // check wether or not its already converted
-            if (!(category instanceof String)) continue
+            if (this.ingredients[i] instanceof String) continue
 
-            let categoryObj = Category.getCategoryById(category)
+            let ingredientObj = Ingredient.getIngredientById(this.ingredients[i])
+            console.log("The ingredient Object is", JSON.stringify(ingredientObj));
 
-            category = categoryObj
+            this.ingredients[i] = ingredientObj
         }
 
         console.debug("Converting finished!")

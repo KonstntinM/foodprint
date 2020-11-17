@@ -31,9 +31,6 @@ import * as eva from '@eva-design/eva';
 
 const Realm = require('realm');
 
-import IngredientSchema from './src/storage/schemas/IngredientSchema'
-import PackageSchema from './src/storage/schemas/PackageSchema'
-
 export default class foodprint extends Component {
 
   // setting up the local database (realm.js)
@@ -44,11 +41,7 @@ export default class foodprint extends Component {
   }
 
   componentDidMount() {
-    Realm.open({
-      schema: [IngredientSchema, PackageSchema]
-    }).then(realm => {
-      this.setState({ realm });
-    });
+    
   }
 
   componentWillUnmount() {

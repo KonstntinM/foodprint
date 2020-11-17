@@ -9,7 +9,7 @@ const baseUrl = "https://world.openfoodfacts.org/api/v0";
 //  
 //  More informations can be found on https://de.openfoodfacts.org/data 
 
-import Product from './models/Product';
+import Product from '../models/product';
 
 export default {
     getProductByBarcode 
@@ -41,6 +41,7 @@ async function getProductByBarcode (barcode) {
 
     var product = new Product(response.product)
     console.debug("Our newly created product is " + JSON.stringify(product));
+    product.sayHi(); 
 
     return product
 }
