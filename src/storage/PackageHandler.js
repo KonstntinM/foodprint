@@ -3,7 +3,8 @@ import realm from '../services/getRealmApp'
 //  This Handler is built with realm.js .
 
 export default {
-    getPackageById
+    getPackageById,
+    getEveryPackaging
 }
 
 /**
@@ -20,4 +21,9 @@ function getPackageById (id) {
     }
 
     return _package_
+}
+
+function getEveryPackaging () {
+    let packaging = realm.objects('Package')
+    return packaging
 }

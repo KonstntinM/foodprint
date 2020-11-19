@@ -1,5 +1,6 @@
 import realm from '../services/getRealmApp'
 import IngredientHandler from '../storage/IngredientHandler'
+import PackageHandler from '../storage/PackageHandler'
 import foodprintApi from './foodprintApi'
 
 //  This function synchronizes the Local Memory with the Foodprint API. 
@@ -10,10 +11,9 @@ async function synchronize() {
     console.debug("The synchronization was started.")
 
     const ingredients = await foodprintApi.getAllIngredients()
+    const packaging = await foodprintApi.getEveryPackaging()
 
-    console.debug("The received ingredients are", JSON.stringify(ingredients))
-
-    if (ingredients /* || packaging */ ) {
+    if ( ingredients || packaging ) {
 
         // Delete all existing objects
         realm.write(() => {
@@ -32,7 +32,17 @@ async function synchronize() {
         })
     }
 
+    for (p in packaging) {
+        let _package = packaging[p]
 
+        realm.write(() => {
+            realm.create('Package', {
+                id: _package.id,
+                value: _package.value
+            });
+        })
+    }
+    
     console.debug("The synchronization was finished.")
 }
 

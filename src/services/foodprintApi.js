@@ -8,7 +8,8 @@ const baseUrl = "https://api.foodprint.konstantinmarx.de";
 
 export default {
     getProductScore,
-    getAllIngredients
+    getAllIngredients,
+    getEveryPackaging
 };
 
 function getProductScore (barcode) {
@@ -34,6 +35,20 @@ function getProductScore (barcode) {
 async function getAllIngredients () {
 
     const urlPath = "/ingredient/"
+    const url = baseUrl + urlPath
+
+    console.debug("The URL will be " + url)
+
+    const response = await fetch(url, {
+        method: 'GET'
+    })
+
+    return await response.json()
+}
+
+async function getEveryPackaging () {
+
+    const urlPath = "/packaging/"
     const url = baseUrl + urlPath
 
     console.debug("The URL will be " + url)
