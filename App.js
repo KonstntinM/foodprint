@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -29,14 +29,34 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from './src/navigator';
 import * as eva from '@eva-design/eva';
 
-export default ({ navigation }) => (
-  <>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <AppNavigator />
-    </ApplicationProvider>
-  </>
-);
+import synchronizationService from './src/services/synchronizationService'
+
+export default class foodprint extends Component {
+
+  // setting up the local database (realm.js)
+
+  componentDidMount() {
+    console.log("The App did mount.");
+    synchronizationService.synchronize()
+  }
+
+  componentWillUnmount() {
+  }
+
+  // render the app
+
+  render() {
+
+    return (
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <AppNavigator />
+        </ApplicationProvider>
+      </>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   scrollView: {

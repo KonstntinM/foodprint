@@ -4,9 +4,13 @@ import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Dimensions, Imag
 
 import { RNCamera } from 'react-native-camera';
 
-import openFoodFacts from '../services/openFoodFacts'
+import barcodeHandler from '../handlers/barcodeHandler'
 
 export default class BarcodeScan extends Component {
+
+    state = {
+        barcodeScanned: false
+    }
 
     onBarCodeRead = (barcode) => {
 
@@ -17,13 +21,12 @@ export default class BarcodeScan extends Component {
 
         this.setState({ barcodeScanned: true })
 
-        // Check wether or not the Barcode is an EAN barcodee
+        // Check wether or not the Barcode is an EAN barcodee 
         if (barcode[0].type != "EAN_13") {
             return [] // If the Barecode isn't of an EAN type, the process will be stopped
         }
 
-        const barcodeData = barcode[0].data
-        openFoodFacts.getProductByBarcode(barcodeData)
+        barcodeHandler(barcode)
     }
 
     restartBarCode = () => {

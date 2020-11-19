@@ -9,13 +9,13 @@ const baseUrl = "https://world.openfoodfacts.org/api/v0";
 //  
 //  More informations can be found on https://de.openfoodfacts.org/data 
 
-import Product from './models/Product';
+import Product from '../models/product';
 
 export default {
     getProductByBarcode 
 };
 
-async function getProductByBarcode (barcode) {
+function getProductByBarcode (barcode) {
 
     console.log("The method getProductByBarcode was called. The data is " + JSON.stringify(barcode));
 
@@ -24,7 +24,7 @@ async function getProductByBarcode (barcode) {
 
     console.debug("Okay, we are just before calling our API. If this is the last thing I'll write I want you to know that the URL I am calling is " + url + " .");
 
-    var response = await fetch(url, {
+    var response = fetch(url, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -33,12 +33,13 @@ async function getProductByBarcode (barcode) {
         }
     })
 
-    response = await response.json()
+    if (!response.ok) return null
+    response = response.json()
 
     console.debug("Huston! We have a response! The response is " + JSON.stringify(response));
 
-    //Todo! Add request success check!
-
     var product = new Product(response.product)
-    console.debug("Our newly created product is " + JSON.stringify(product));
+    console.debug("Our newly created product is " + JSON.stringify(product)); 
+
+    return product
 }
