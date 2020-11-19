@@ -1,3 +1,4 @@
+import foodprintApi from '../services/foodprintApi';
 import Ingredient from '../storage/IngredientHandler'
 import Package from '../storage/PackageHandler'
 
@@ -41,10 +42,15 @@ export default class Product {
 
         // TODO Check wether or not the product has a fixed footprint
 
-        // calculate
-        let score = 0;
+        let product = foodprintApi.getProductScore(this.barcode)
+        if (product) {
+            this.score = product.value
+            return this.score
+        }
 
-        console.log(score);
+        // calculate
+
+        let score = 0;
 
         this.convertIngredients()
         this.convertPackaging()

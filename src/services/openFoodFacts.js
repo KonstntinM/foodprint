@@ -33,11 +33,10 @@ async function getProductByBarcode (barcode) {
         }
     })
 
+    if (!response.ok) return null
     response = await response.json()
 
     console.debug("Huston! We have a response! The response is " + JSON.stringify(response));
-
-    //Todo! Add request success check!
 
     var product = new Product(response.product)
     console.debug("Our newly created product is " + JSON.stringify(product)); 
