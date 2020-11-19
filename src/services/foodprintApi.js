@@ -7,7 +7,8 @@ const baseUrl = "https://api.foodprint.konstantinmarx.de";
 //  More informations can be found on https://github.com/KonstantinM/foodprint
 
 export default {
-    getProductScore
+    getProductScore,
+    getAllIngredients
 };
 
 function getProductScore (barcode) {
@@ -24,8 +25,22 @@ function getProductScore (barcode) {
         }
     })
 
-    if (response.status != 200) return undefined
+    if (!response.ok) return undefined
 
     response = response.json()
     return response.value
+}
+
+async function getAllIngredients () {
+
+    const urlPath = "/ingredient/"
+    const url = baseUrl + urlPath
+
+    console.debug("The URL will be " + url)
+
+    const response = await fetch(url, {
+        method: 'GET'
+    })
+
+    return await response.json()
 }

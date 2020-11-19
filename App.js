@@ -29,27 +29,18 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from './src/navigator';
 import * as eva from '@eva-design/eva';
 
-const Realm = require('realm');
+import synchronizationService from './src/services/synchronizationService'
 
 export default class foodprint extends Component {
 
   // setting up the local database (realm.js)
 
-  constructor(props) {
-    super(props);
-    this.state = { realm: null };
-  }
-
   componentDidMount() {
-    
+    console.log("The App did mount.");
+    synchronizationService.synchronize()
   }
 
   componentWillUnmount() {
-    // Close the realm if there is one open.
-    const { realm } = this.state;
-    if (realm !== null && !realm.isClosed) {
-      realm.close();
-    }
   }
 
   // render the app

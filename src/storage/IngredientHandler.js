@@ -3,7 +3,8 @@ import realm from '../services/getRealmApp'
 //  This Handler is built with realm.js .
 
 export default {
-    getIngredientById
+    getIngredientById,
+    getAllIngredients
 }
 
 /**
@@ -20,4 +21,9 @@ function getIngredientById (id) {
     }
 
     return ingredient
+}
+
+function getAllIngredients () {
+    let ingredients = realm.objects('Ingredient')
+    return ingredients
 }
