@@ -10,12 +10,12 @@ export default {
     getProductScore
 };
 
-async function getProductScore (barcode) {
+function getProductScore (barcode) {
 
     const urlPath = "/product/"
     const url = baseUrl + urlPath + barcode
 
-    var response = await fetch(url, {
+    var response = fetch(url, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -24,8 +24,8 @@ async function getProductScore (barcode) {
         }
     })
 
-    if (!response.ok) return null
+    if (response.status != 200) return undefined
 
-    response = await response.json()
+    response = response.json()
     return response.value
 }
