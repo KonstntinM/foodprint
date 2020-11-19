@@ -6,12 +6,6 @@ export default {
     getPackageById
 }
 
-// empty package template for non existent categories
-let emptyPackage = {
-    id: 'string',
-    value: 0
-}
-
 /**
  * Request a package from local storage.
  */
@@ -22,8 +16,7 @@ function getPackageById (id) {
     _package_ = _package_[0];
 
     if (!_package_) {
-        emptyPackage.id = id
-        _package_ = emptyPackage
+        return { id: id , value: 0}
     }
 
     return _package_

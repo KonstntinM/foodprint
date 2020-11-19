@@ -42,7 +42,9 @@ export default class Product {
 
         // TODO Check wether or not the product has a fixed footprint
 
+        let product = foodprintApi.getProductScore(this.barcode)
         if (product) {
+            console.log("Does exist!");
             this.score = product.value
             return this.score
         }

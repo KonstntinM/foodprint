@@ -6,12 +6,6 @@ export default {
     getIngredientById
 }
 
-// empty ingredient template for non existent categories
-let emptyIngredient = {
-    id: 'string',
-    value: 0
-}
-
 /**
  * Request an ingredient from local storage.
  */
@@ -22,8 +16,7 @@ function getIngredientById (id) {
     ingredient = ingredient[0];
 
     if (!ingredient) {
-        emptyIngredient.id = id
-        ingredient = emptyIngredient
+        return { id: id , value: 0}
     }
 
     return ingredient
