@@ -1,4 +1,5 @@
 import Ingredient from '../storage/IngredientHandler'
+import Package from '../storage/PackageHandler'
 
 //  This Product Object represents a scanned product, whos product informations were called from the openFoodFacts api.
 //  Lateron the carbon footprint will be attached to this object. 
@@ -46,17 +47,17 @@ export default class Product {
         console.log(score);
 
         this.convertIngredients()
+        this.convertPackaging()
         
         // add categorie values
         for (i in this.ingredients) {
-            console.log(JSON.stringify(this.ingredients[i]), score);
             score = score + this.ingredients[i].value;
         }
 
         // add packaging values
-        //for (packaging in this.packaging) {
-        //    score = score + packaging.value;
-        //}
+        for (p in this.packaging) {
+            score = score + this.packaging[p].value;
+        }
 
         console.log("The Foodprint of the product is", score)
 
@@ -65,18 +66,36 @@ export default class Product {
     }
 
     /**
-     * Converts the attached categoryIds into category objects. 
+     * Converts the attached ingredientIds into category objects. 
      */
     convertIngredients () {
 
-        console.debug("Converting categories...");
+        console.debug("Convert ingredients...");
 
         for (i in this.ingredients) {
             // check wether or not its already converted
             if (this.ingredients[i] instanceof String) continue
 
-            let ingredientObj = Ingredient.getIngredientById(this.ingredients[i])
-            this.ingredients[i] = ingredientObj
+            let ingredient = Ingredient.getIngredientById(this.ingredients[i])
+            this.ingredients[i] = ingredient
+        }
+
+        console.debug("Converting finished!")
+    }
+
+    /**
+     * Converts the attached packagingIds into category objects.
+     */
+    convertPackaging () {
+
+        console.debug("Convert packaging...");
+
+        for (p in this.packaging) {
+            // check wether or not its already converted
+            if (this.packaging[p] instanceof String) continue
+
+            let _package_ = Package.getPackageById(this.packaging[p])
+            this.packaging[p] = _package_
         }
 
         console.debug("Converting finished!")
