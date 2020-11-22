@@ -17,7 +17,8 @@ function getPackageById (id) {
     _package_ = _package_[0];
 
     if (!_package_) {
-        return { id: id , value: 0}
+        let name = id.substring(str.indexOf(":") + 1)
+        return { id: id , value: 0, name: name}
     }
 
     return _package_

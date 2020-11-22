@@ -9,7 +9,8 @@ Ingredient.schema = {
         value: { 
             type: 'int', 
             default: 0 
-        } 
+        },
+        name: 'string'
     } 
 }
 

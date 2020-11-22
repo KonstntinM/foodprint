@@ -24,10 +24,13 @@ async function synchronize() {
     for (i in ingredients) {
         let ingredient = ingredients[i]
 
+        ingredient.name = ingredient.id.substring(str.indexOf(":") + 1);
+
         realm.write(() => {
             realm.create('Ingredient', {
                 id: ingredient.id,
-                value: ingredient.value
+                value: ingredient.value,
+                name: ingredient.name
             });
         })
     }
@@ -35,10 +38,13 @@ async function synchronize() {
     for (p in packaging) {
         let _package = packaging[p]
 
+        _package.name = _package.id.substring(str.indexOf(":") + 1);
+
         realm.write(() => {
             realm.create('Package', {
                 id: _package.id,
-                value: _package.value
+                value: _package.value,
+                name: _package.name
             });
         })
     }

@@ -11,22 +11,18 @@ import { Button, Card, Icon, List, StyleService, Text, useStyleSheet } from '@ui
 import { ImageOverlay } from '../components/product/image-overlay.component';
 import { Product, ProductOption } from '../components/product/data';
 
-const product: Product = Product.centralParkApartment();
+const product = {"name":"Pralinés Milchcréme","barcode":"7622210598080","image":"https://static.openfoodfacts.org/images/products/762/221/059/8080/front_de.4.400.jpg","ingredients":[{"id":"en:sugar","value":0,"name":"sugar"},{"id":"en:palm-oil","value":0,"name":"palm-oil"},{"id":"en:oil-and-fat","value":0,"name":"oil-and-fat"},{"id":"en:vegetable-oil-and-fat","value":0,"name":"vegetable-oil-and-fat"},{"id":"en:palm-oil-and-fat","value":0,"name":"palm-oil-and-fat"},{"id":"en:cocoa-butter","value":0,"name":"cocoa-butter"},{"id":"en:cocoa","value":0,"name":"cocoa"},{"id":"en:skimmed-milk-powder","value":0,"name":"skimmed-milk-powder"},{"id":"en:dairy","value":10,"name":"dairy"},{"id":"en:milk-powder","value":0,"name":"milk-powder"},{"id":"en:sweet-whey-powder","value":0,"name":"sweet-whey-powder"},{"id":"en:whey","value":0,"name":"whey"},{"id":"en:sweet-whey","value":10,"name":"sweet-whey"},{"id":"en:cocoa-paste","value":0,"name":"cocoa-paste"},{"id":"en:butterfat","value":0,"name":"butterfat"},{"id":"en:fat","value":0,"name":"fat"},{"id":"en:milkfat","value":0,"name":"milkfat"},{"id":"en:emulsifier","value":0,"name":"emulsifier"},{"id":"en:hazelnut-paste","value":0,"name":"hazelnut-paste"},{"id":"en:nut","value":0,"name":"nut"},{"id":"en:tree-nut","value":0,"name":"tree-nut"},{"id":"en:hazelnut","value":0,"name":"hazelnut"},{"id":"en:flavouring","value":0,"name":"flavouring"},{"id":"en:milk","value":0,"name":"milk"},{"id":"en:soya-lecithin","value":0,"name":"soya-lecithin"},{"id":"en:e322","value":0,"name":"e322"},{"id":"en:e322i","value":0,"name":"e322i"},{"id":"en:e476","value":0,"name":"e476"}],"packaging":[],"categories":["en:snacks","en:sweet-snacks","en:confectioneries","en:chocolate-candies","en:bonbons"],"score":20}
+
+const image = require('../../assets/img/image-product.jpg')
 
 export default (): React.ReactElement => {
 
   const styles = useStyleSheet(themedStyles);
 
   const onBookButtonPress = (): void => {
-
+    console.log("Button pressed!");
+    
   };
-
-  const renderImageItem = (info: ListRenderItemInfo<ImageSourcePropType>): React.ReactElement => (
-    <Image
-      style={styles.imageItem}
-      source={info.item}
-    />
-  );
 
   const renderOptionItemIcon = (style: ImageStyle, icon: string): React.ReactElement => (
     <Icon {...style} name={icon}/>
@@ -39,7 +35,7 @@ export default (): React.ReactElement => {
       appearance='ghost'
       size='small'
       icon={(style: ImageStyle) => renderOptionItemIcon(style, option.icon)}>
-      {option.title}
+      {option.name}
     </Button>
   );
 
@@ -49,7 +45,7 @@ export default (): React.ReactElement => {
       style={styles.detailItem}
       appearance='outline'
       size='tiny'>
-      {detail}
+      {detail.substring(detail.indexOf(":")+1)}
     </Button>
   );
 
@@ -57,13 +53,13 @@ export default (): React.ReactElement => {
     <View>
       <Text
         category='s1'>
-        Facilities
+        Ingredients
       </Text>
       <View style={styles.detailsList}>
-        {product.details.map(renderDetailItem)}
+        {product.categories.map(renderDetailItem)}
       </View>
       <View style={styles.optionList}>
-        {product.options.map(renderOptionItem)}
+        {product.ingredients.map(renderOptionItem)}
       </View>
     </View>
   );
@@ -71,8 +67,9 @@ export default (): React.ReactElement => {
   return (
     <ScrollView style={styles.container}>
       <ImageOverlay
+        source={{uri: product.image}}
+        imageStyle={{resizeMode: 'stretch'}}
         style={styles.image}
-        source={product.primaryImage}
       />
       <Card
         style={styles.bookingCard}
@@ -82,48 +79,20 @@ export default (): React.ReactElement => {
         <Text
           style={styles.title}
           category='h6'>
-          {product.title}
+          {product.name}
         </Text>
         <Text
           style={styles.rentLabel}
           appearance='hint'
           category='p2'>
-          Rent House
+          Carbon Score
         </Text>
         <Text
           style={styles.priceLabel}
           category='h6'>
-          {product.price.formattedValue}
-          <Text>{product.price.formattedScale}</Text>
+          {product.score}
         </Text>
-        <Button
-          style={styles.bookButton}
-          onPress={onBookButtonPress}>
-          BOOK NOW
-        </Button>
       </Card>
-      <Text
-        style={styles.sectionLabel}
-        category='s1'>
-        About
-      </Text>
-      <Text
-        style={styles.description}
-        appearance='hint'>
-        {product.description}
-      </Text>
-      <Text
-        style={styles.sectionLabel}
-        category='s1'>
-        Photos
-      </Text>
-      <List
-        contentContainerStyle={styles.imagesList}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        data={product.images}
-        renderItem={renderImageItem}
-      />
     </ScrollView>
   );
 };
