@@ -6,6 +6,7 @@ import { BottomNavigation, BottomNavigationTab, Layout, Text, Icon  } from '@ui-
 import ScannerScreen from './screens/ScannerScreen'
 import HistoryScreen from './screens/HistoryScreen'
 import SettingsScreen from './screens/SettingsScreen'
+import ProductScreen from './screens/ProductScreen'
 
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -23,7 +24,7 @@ const BottomTabBar = ({ navigation, state }) => (
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
     <Screen name='Home' component={ScannerScreen}/>
-    <Screen name='History' component={HistoryScreen}/>
+    <Screen name='History' component={ProductScreen}/>
     <Screen name='Settings' component={SettingsScreen}/>
   </Navigator>
 );
