@@ -24,7 +24,7 @@ async function synchronize() {
     for (i in ingredients) {
         let ingredient = ingredients[i]
 
-        ingredient.name = ingredient.id.substring(str.indexOf(":") + 1);
+        ingredient.name = ingredient.id.substring(ingredient.id.indexOf(":") + 1);
 
         realm.write(() => {
             realm.create('Ingredient', {
@@ -38,7 +38,7 @@ async function synchronize() {
     for (p in packaging) {
         let _package = packaging[p]
 
-        _package.name = _package.id.substring(str.indexOf(":") + 1);
+        _package.name = _package.id.substring(_package.id.indexOf(":") + 1);
 
         realm.write(() => {
             realm.create('Package', {

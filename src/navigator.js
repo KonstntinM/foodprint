@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, Layout, Text, Icon  } from '@ui-kitten/components';
+import navigationRef from './handlers/navigationRef'
 
 import ScannerScreen from './screens/ScannerScreen'
 import HistoryScreen from './screens/HistoryScreen'
@@ -30,7 +31,7 @@ const TabNavigator = () => (
 );
 
 export const AppNavigator = () => (
-  <NavigationContainer>
+  <NavigationContainer ref={navigationRef}>
     <TabNavigator/>
   </NavigationContainer>
 );

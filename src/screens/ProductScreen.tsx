@@ -7,7 +7,7 @@ import {
   ScrollView,
   View,
 } from 'react-native';
-import { Button, Card, Icon, List, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
+import { Button, Card, Icon, List, StyleService, Text, useStyleSheet } from '@ui-kitten/components'; 
 import { ImageOverlay } from '../components/product/image-overlay.component';
 import { Product, ProductOption } from '../components/product/data';
 
@@ -15,9 +15,11 @@ const product = {"name":"Pralinés Milchcréme","barcode":"7622210598080","image
 
 const image = require('../../assets/img/image-product.jpg')
 
-export default (): React.ReactElement => {
+export default ({ route }): React.ReactElement => {
 
   const styles = useStyleSheet(themedStyles);
+
+  const { product } = route.params;
 
   const onBookButtonPress = (): void => {
     console.log("Button pressed!");
