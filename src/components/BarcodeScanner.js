@@ -12,6 +12,10 @@ export default class BarcodeScan extends Component {
         barcodeScanned: false
     }
 
+    componentDidMount = () => {
+        this.setState({ barcodeScanned: false })
+    }
+
     onBarCodeRead = (barcode) => {
 
         if (this.state.barcodeScanned) {

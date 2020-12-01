@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, Layout, Text, Icon  } from '@ui-kitten/components';
-import navigationRef from './handlers/navigationRef'
+import { navigationRef } from './handlers/navigationRef'
 
 import ScannerScreen from './screens/ScannerScreen'
 import HistoryScreen from './screens/HistoryScreen'
@@ -25,8 +25,9 @@ const BottomTabBar = ({ navigation, state }) => (
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
     <Screen name='Home' component={ScannerScreen}/>
-    <Screen name='History' component={ProductScreen}/>
+    <Screen name='History' component={HistoryScreen}/>
     <Screen name='Settings' component={SettingsScreen}/>
+    <Screen name='Product' component={ProductScreen}/>
   </Navigator>
 );
 

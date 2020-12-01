@@ -15,7 +15,7 @@ export default {
     getProductByBarcode 
 };
 
-function getProductByBarcode (barcode) {
+async function getProductByBarcode (barcode) {
 
     console.log("The method getProductByBarcode was called. The data is " + JSON.stringify(barcode));
 
@@ -24,7 +24,7 @@ function getProductByBarcode (barcode) {
 
     console.debug("Okay, we are just before calling our API. If this is the last thing I'll write I want you to know that the URL I am calling is " + url + " .");
 
-    var response = fetch(url, {
+    var response = await fetch(url, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -32,12 +32,13 @@ function getProductByBarcode (barcode) {
           'Application': 'Foodprint'
         }
     })
-
-    if (!response.ok) return null
-    response = response.json()
+        .then((response) => {
+            if (!response.ok) return null
+            return response.json()
+        })
 
     console.debug("Huston! We have a response! The response is " + JSON.stringify(response));
-
+ 
     var product = new Product(response.product)
     console.debug("Our newly created product is " + JSON.stringify(product)); 
 

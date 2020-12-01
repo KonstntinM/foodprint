@@ -17,8 +17,8 @@ function getIngredientById (id) {
     ingredient = ingredient[0];
 
     if (!ingredient) {
-        let name = id.substring(str.indexOf(":") + 1);
-        return { id: id , value: 0, name: name}
+        let name = id.substring(id.indexOf(":") + 1);
+        return { id: id , value: 0, name: name }
     }
 
     return ingredient

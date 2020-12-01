@@ -1,8 +1,8 @@
 import openFoodFacts from '../services/openFoodFacts'
-import navigator from './navigationRef'
+import * as navigator from './navigationRef'
 
 //  This function is called if a barcode was scanned. 
-//  It calls the openFoodFacts API, calculates the carboon value and loads the next page. 
+//  It calls the openFoodFacts API, calculates the carboon value and loads the next page.
 //  
 //  parameters: barcode obj. 
 
@@ -15,5 +15,5 @@ export default async function (barcode) {
     await product.calculateFootprint()
 
     console.debug("The final Product is", JSON.stringify(product))
-    navigator.navigate('History')
+    navigator.navigate('Product', { product: product })
 }
