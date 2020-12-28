@@ -10,8 +10,9 @@ import {
 import { Button, Card, Icon, List, StyleService, Text, useStyleSheet } from '@ui-kitten/components'; 
 import { ImageOverlay } from '../components/product/image-overlay.component';
 import { Product, ProductOption } from '../components/product/data';
+import Score from '../components/product/Score'
 
-//const product = {"name":"Pralinés Milchcréme","barcode":"7622210598080","image":"https://static.openfoodfacts.org/images/products/762/221/059/8080/front_de.4.400.jpg","ingredients":[{"id":"en:sugar","value":0,"name":"sugar"},{"id":"en:palm-oil","value":0,"name":"palm-oil"},{"id":"en:oil-and-fat","value":0,"name":"oil-and-fat"},{"id":"en:vegetable-oil-and-fat","value":0,"name":"vegetable-oil-and-fat"},{"id":"en:palm-oil-and-fat","value":0,"name":"palm-oil-and-fat"},{"id":"en:cocoa-butter","value":0,"name":"cocoa-butter"},{"id":"en:cocoa","value":0,"name":"cocoa"},{"id":"en:skimmed-milk-powder","value":0,"name":"skimmed-milk-powder"},{"id":"en:dairy","value":10,"name":"dairy"},{"id":"en:milk-powder","value":0,"name":"milk-powder"},{"id":"en:sweet-whey-powder","value":0,"name":"sweet-whey-powder"},{"id":"en:whey","value":0,"name":"whey"},{"id":"en:sweet-whey","value":10,"name":"sweet-whey"},{"id":"en:cocoa-paste","value":0,"name":"cocoa-paste"},{"id":"en:butterfat","value":0,"name":"butterfat"},{"id":"en:fat","value":0,"name":"fat"},{"id":"en:milkfat","value":0,"name":"milkfat"},{"id":"en:emulsifier","value":0,"name":"emulsifier"},{"id":"en:hazelnut-paste","value":0,"name":"hazelnut-paste"},{"id":"en:nut","value":0,"name":"nut"},{"id":"en:tree-nut","value":0,"name":"tree-nut"},{"id":"en:hazelnut","value":0,"name":"hazelnut"},{"id":"en:flavouring","value":0,"name":"flavouring"},{"id":"en:milk","value":0,"name":"milk"},{"id":"en:soya-lecithin","value":0,"name":"soya-lecithin"},{"id":"en:e322","value":0,"name":"e322"},{"id":"en:e322i","value":0,"name":"e322i"},{"id":"en:e476","value":0,"name":"e476"}],"packaging":[],"categories":["en:snacks","en:sweet-snacks","en:confectioneries","en:chocolate-candies","en:bonbons"],"score":20}
+const product = {"name":"Pralinés Milchcréme","barcode":"7622210598080","image":"https://static.openfoodfacts.org/images/products/762/221/059/8080/front_de.4.400.jpg","ingredients":[{"id":"en:sugar","value":0,"name":"sugar"},{"id":"en:palm-oil","value":0,"name":"palm-oil"},{"id":"en:oil-and-fat","value":0,"name":"oil-and-fat"},{"id":"en:vegetable-oil-and-fat","value":0,"name":"vegetable-oil-and-fat"},{"id":"en:palm-oil-and-fat","value":0,"name":"palm-oil-and-fat"},{"id":"en:cocoa-butter","value":0,"name":"cocoa-butter"},{"id":"en:cocoa","value":0,"name":"cocoa"},{"id":"en:skimmed-milk-powder","value":0,"name":"skimmed-milk-powder"},{"id":"en:dairy","value":10,"name":"dairy"},{"id":"en:milk-powder","value":0,"name":"milk-powder"},{"id":"en:sweet-whey-powder","value":0,"name":"sweet-whey-powder"},{"id":"en:whey","value":0,"name":"whey"},{"id":"en:sweet-whey","value":10,"name":"sweet-whey"},{"id":"en:cocoa-paste","value":0,"name":"cocoa-paste"},{"id":"en:butterfat","value":0,"name":"butterfat"},{"id":"en:fat","value":0,"name":"fat"},{"id":"en:milkfat","value":0,"name":"milkfat"},{"id":"en:emulsifier","value":0,"name":"emulsifier"},{"id":"en:hazelnut-paste","value":0,"name":"hazelnut-paste"},{"id":"en:nut","value":0,"name":"nut"},{"id":"en:tree-nut","value":0,"name":"tree-nut"},{"id":"en:hazelnut","value":0,"name":"hazelnut"},{"id":"en:flavouring","value":0,"name":"flavouring"},{"id":"en:milk","value":0,"name":"milk"},{"id":"en:soya-lecithin","value":0,"name":"soya-lecithin"},{"id":"en:e322","value":0,"name":"e322"},{"id":"en:e322i","value":0,"name":"e322i"},{"id":"en:e476","value":0,"name":"e476"}],"packaging":[],"categories":["en:snacks","en:sweet-snacks","en:confectioneries","en:chocolate-candies","en:bonbons"],"score":20}
 
 const image = require('../../assets/img/image-product.jpg')
 
@@ -19,7 +20,10 @@ export default ({ route }): React.ReactElement => {
 
   const styles = useStyleSheet(themedStyles);
 
-  const { product } = route.params;
+  //const { product } = route.params;
+
+  product.primaryCategory = product.categories[0].substring(product.categories[0].indexOf(':')+1)
+  product.primaryCategory = product.primaryCategory.charAt(0).toUpperCase() + product.primaryCategory.slice(1)
 
   const onBookButtonPress = (): void => {
     console.log("Button pressed!");
@@ -84,11 +88,14 @@ export default ({ route }): React.ReactElement => {
           {product.name}
         </Text>
         <Text
-          style={styles.rentLabel}
           appearance='hint'
           category='p2'>
-          Carbon Score
+          {product.primaryCategory}
         </Text>
+        <View>
+
+        </View>
+        <Score/>
         <Text
           style={styles.priceLabel}
           category='h6'>

@@ -25,7 +25,7 @@ const BottomTabBar = ({ navigation, state }) => (
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
     <Screen name='Home' component={ScannerScreen}/>
-    <Screen name='History' component={HistoryScreen}/>
+    <Screen name='History' component={ProductScreen}/>
     <Screen name='Settings' component={SettingsScreen}/>
     <Screen name='Product' component={ProductScreen}/>
   </Navigator>
