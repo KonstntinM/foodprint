@@ -1,100 +1,61 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, { Component, useState, useEffect } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-import React, { Component } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import * as Font from 'expo-font';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import NavigationContainer from './src/services/navigator'
+import NavigationBar from './src/components/navigation/navigationBar'
 
-import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { AppNavigator } from './src/navigator';
-import * as eva from '@eva-design/eva';
+export default class App extends Component {
 
-import synchronizationService from './src/services/synchronizationService'
+  state = {
+    fontsLoaded: false,
+    firebaseInitialized: false,
+    hasCameraPermission: null
+  };
 
-export default class foodprint extends Component {
+  async loadFonts() {
+    await Font.loadAsync({
+      // Load fonts from static resources
+      LemonMilk: require('./assets/fonts/LEMONMILK-Medium.ttf'),
+      Raleway: require('./assets/fonts/Raleway-Regular.ttf'),
+      'Open Sans': require('./assets/fonts/OpenSans-Regular.ttf')
+    });
+    this.setState({ fontsLoaded: true });
+  }
 
-  // setting up the local database (realm.js)
+  async requestPermissions () {
+    const { status } = await BarCodeScanner.requestPermissionsAsync();
+    this.state.hasCameraPermission = status === 'granted';
+  }
 
   componentDidMount() {
-    console.log("The App did mount.");
-    synchronizationService.synchronize()
+    this.loadFonts();
+    this.requestPermissions();
   }
-
-  componentWillUnmount() {
-  }
-
-  // render the app
 
   render() {
-
-    return (
-      <>
-        <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider {...eva} theme={eva.light}>
-          <AppNavigator />
-        </ApplicationProvider>
-      </>
-    );
+    if (this.state.fontsLoaded) {
+      return (
+        <View style={styles.container}>
+          <NavigationContainer style={styles.container}/>
+          <NavigationBar style={styles.navigationBar}/>
+        </View>
+      );
+    } else {
+      return null;
+    } 
   }
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
   },
-  engine: {
+  navigationBar: {
     position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+    bottom: 0
+  }
 });
-
-//export default App;
