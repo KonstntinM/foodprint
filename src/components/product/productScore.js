@@ -9,26 +9,17 @@ export default class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emojiAnimation: useRef(new Animated.Value(3)).current
+      
     };
   }
 
   render() {
 
-    // Value (min-max):(5-1500)= (Max = 1500) 1500 = 217 1500 = 100% 1500/1500 = 1 ; 1000
-    let value = 217*(this.props.score.total/1500)
-    if (value>217) value = 217;
-
-    Animated.timing(this.state.emojiAnimation, {
-      toValue: value,
-      duration: 1500,
-    }).start();
-
     return (
         <View style={styles.container}>
             <View style={styles.scoreFeedback}>
                 <View style={styles.scoreBar}>
-                  <Image source={require("../../../assets/icons/emojis/thumbs-up.png")} style={[styles.emoji, { left: this.state.emojiAnimation }]}/>
+                  <Image source={require("../../../assets/icons/emojis/thumbs-up.png")} style={styles.emoji}/>
                 </View>
             </View>
             <View style={styles.scoreTextContainer}>
