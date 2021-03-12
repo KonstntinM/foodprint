@@ -1,5 +1,4 @@
-import * as firebase from 'firebase';
-import 'firebase/firestore';
+import firebase from 'firebase/app';
 
 var firebaseConfig = {
     apiKey: "AIzaSyAjCseS8CDxDlh4F9WKeQNRHt79VKyWJBQ",
@@ -17,35 +16,29 @@ if (!firebase.apps.length) {
     firebase.app();
 }
 
-const firestore = firebase.firestore();
-const productRef = firestore.collection("products");
+var db = firebase.firestore();
 
 async function getProductByBarcode (barcode) {
 
     console.log("barcode:", barcode)
 
-    let ref = productRef.doc(barcode);
+    var { doc, error } = await db.collection("products").doc(barcode).get();
 
-    var { doc, error } = await ref.get()
+    if (error || !doc ) {
+        console.error("Error making product request:", error, "doc:", doc);
+        return new Promise((resolve, reject) => { reject({
+            status: 404,
+            message: "The product could not be found in our database."
+        })})
+    }
 
-    ref.get().then(function(doc) {
-        if (doc.exists) {
-            console.log('data', doc.data());
-            return doc.data();
-        } else {
-            return requestProductFromFunction();
-        }
-    }).catch(function(error) {
-        if (error) {
-            console.error("Error making product request:", error);
-            return {
-                status: 404,
-                message: "The product could not be found in our database."
-            }
-        }
-    });
-
-    console.log('Request finished!');
+    if (doc.exists) {
+        console.log('data', doc.data());
+        const data = doc.data();
+        return new Promise((resolve, reject) => { resolve(data) })
+    } else {
+        return requestProductFromFunction();
+    }
 }
 
 async function requestProductFromFunction (barcode) {

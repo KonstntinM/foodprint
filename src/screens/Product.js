@@ -16,8 +16,14 @@ export default class Product extends Component {
         };
     }
 
-    render() {
+    componentDidMount () {
+        console.log("The Product Method was called.");
+        var product = this.props.route.params.product;
+        console.log("The Product is", product)
+        return product;
+    }
 
+    render() {
         return (
             <ScrollView bounces={false} style={styles.product}>
                 <Header name={"Milk"} category={"some food"} image={"https://cdn.pixabay.com/photo/2016/08/07/15/01/blueberries-1576405_960_720.jpg"} />

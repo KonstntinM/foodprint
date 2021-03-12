@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Image } from 'react-native';
+import { Text, View, StyleSheet, Button, Image, TouchableOpacityBase } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 import productService from '../services/productService';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Scanner() {
   const navigation = useNavigation();
@@ -21,7 +22,14 @@ export default function Scanner() {
 
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    const product = await productService.getProductByBarcode("737628064502")
+    productService.getProductByBarcode("737628064502")
+      .then((product) => {
+        console.log("Produktdetails erfolgreich empfangen. Navigation zu 'product'. Produktdetails:", product);
+        navigation.navigate('Product', { product: product });
+      })
+      .catch((error) => {
+        console.error("ERROR!")
+      })
 
     /*if (product.status && product.status == 404) {
         return navigation.navigate('home', { message: "UPS!"});;
@@ -29,12 +37,11 @@ export default function Scanner() {
         return navigation.navigate('home', { message: "UPS! 2"});;
     }*/
 
-    console.log("Produktdetails erfolgreich empfangen. Navigation zu 'product'. Produktdetails:", product);
-    navigation.navigate('Product', product);
+    
   };
 
   if (hasPermission === null) {
-    return <Image source={require('../../assets/img/camera.png')}/>;
+    return <Image source={require('../../assets/img/camera.png')} />;
   }
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
@@ -53,17 +60,16 @@ export default function Scanner() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        "width": 179,
-        "height": 179,
-        overflow: 'hidden',
-        borderRadius: 30,
-    },
-    scanner: {
-        width: 195,
-        height: 195,
-        borderRadius: 37,
-        overflow: 'hidden'
-    }
+  container: {
+    "width": 179,
+    "height": 179,
+    overflow: 'hidden',
+    borderRadius: 30,
+  },
+  scanner: {
+    width: 195,
+    height: 195,
+    borderRadius: 37,
+    overflow: 'hidden'
+  }
 });
-  
