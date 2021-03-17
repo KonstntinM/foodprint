@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/functions'
 
 var firebaseConfig = {
     apiKey: "AIzaSyAjCseS8CDxDlh4F9WKeQNRHt79VKyWJBQ",
@@ -20,9 +21,6 @@ if (!firebase.apps.length) {
 var db = firebase.firestore();
 
 async function getProductByBarcode (barcode) {
-
-    console.log("barcode:", barcode)
-
     var doc = await db.collection("products").doc(barcode).get();
 
     if (!doc) {
@@ -34,17 +32,14 @@ async function getProductByBarcode (barcode) {
     }
 
     if (doc.exists) {
-        console.log('data', doc.data());
         const data = doc.data();
         return new Promise((resolve, reject) => { resolve(data) })
     } else {
-        return requestProductFromFunction();
+        return requestProductFromFunction({ EAN: barcode });
     }
 }
 
-async function requestProductFromFunction (barcode) {
-    return product;
-}
+var requestProductFromFunction = firebase.functions().httpsCallable('requestProduct');
 
 module.exports = {
     getProductByBarcode,
