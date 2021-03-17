@@ -21,11 +21,9 @@ export default function Scanner() {
   }, []);
 
   const handleBarCodeScanned = async ({ type, data }) => {
-    console.log("data is", data);
     setScanned(true);
     productService.getProductByBarcode(data)
       .then((product) => {
-        console.log("Produktdetails erfolgreich empfangen. Navigation zu 'product'. Produktdetails:", product);
         navigation.navigate('Product', { product: product });
       })
       .catch((error) => {

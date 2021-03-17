@@ -17,9 +17,8 @@ export default class Product extends Component {
     }
 
     componentDidMount () {
-        console.log("The Product Method was called.");
         var product = this.props.route.params.product;
-        console.log("The Product is", product)
+        console.log("The product screen was called with the following product.", product)
         return product;
     }
 
