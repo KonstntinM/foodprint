@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         "fontSize": 60,
         "fontWeight": "700",
         "fontStyle": "normal",
-        "fontFamily": "LEMON MILK",
+        "fontFamily": "LemonMilk",
         "textAlign": "left",
         "width": 160,
         "height": 65

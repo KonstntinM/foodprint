@@ -3,8 +3,7 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "zq-kge",
+  "urlRandomness": null,
   "https": false,
-  "scheme": null,
-  "devClient": false
+  "scheme": null
 }

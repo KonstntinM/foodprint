@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         "fontSize": 20,
         "fontWeight": "400",
         "fontStyle": "normal",
-        "fontFamily": "LEMON MILK",
+        "fontFamily": "LemonMilk",
     },
     tagContainer: {
         display: 'flex',
