@@ -23,10 +23,10 @@ async function getProductByBarcode (barcode) {
 
     console.log("barcode:", barcode)
 
-    var { doc, error } = await db.collection("products").doc(barcode).get();
+    var doc = await db.collection("products").doc(barcode).get();
 
-    if (error || !doc ) {
-        console.error("Error making product request:", error, "doc:", doc);
+    if (!doc) {
+        console.error("Error making product request: doc:", doc);
         return new Promise((resolve, reject) => { reject({
             status: 404,
             message: "The product could not be found in our database."

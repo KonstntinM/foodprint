@@ -28,7 +28,7 @@ export default function Scanner() {
         navigation.navigate('Product', { product: product });
       })
       .catch((error) => {
-        console.error("ERROR!")
+        console.error(error)
       })
 
     /*if (product.status && product.status == 404) {
