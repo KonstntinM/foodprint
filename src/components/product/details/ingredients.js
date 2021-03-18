@@ -11,7 +11,7 @@ export default function Ingredients(props) {
                     return (
                         <View key={i} style={styles.buttonContainer}>
                             <TouchableOpacity onPress={() => alert('Ingredients clicked!')}>
-                                <Text style={styles.IngredientsTitle}>{ingredient.title}</Text>
+                                <Text style={styles.IngredientsTitle}>{ingredient.name}</Text>
                             </TouchableOpacity>
                             {/*<Button style={styles.IngredientsButton} title={AIngredients.title}></Button>*/}
                         </View>

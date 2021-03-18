@@ -4,28 +4,13 @@ import ProgressCircle from 'react-native-progress-circle';
 
 export default function productNutritions(props) {
 
-    const nutritions = [
-        {
-            name: "Lactose",
-            percentage: 22
-        },
-        {
-            name: "Shugar",
-            percentage: 50
-        },
-        {
-            name: "Fat",
-            percentage: 67.8
-        }
-    ];
-
     return (
         <View style={styles.container}>
-            {nutritions.map((nutrition, i) => {         
+            {props.nutritions.map((nutrition, i) => {         
                 return (
                     <View key={i} style={styles.nutritionContainer}>
                         <ProgressCircle
-                            percent={nutrition.percentage}
+                            percent={nutrition.per100g}
                             radius={28}
                             borderWidth={5}
                             color="#005650"
@@ -34,7 +19,7 @@ export default function productNutritions(props) {
                             outerCircleStyle={styles.percentageOuterCircle}
                             containerStyle={styles.percentageContainerStyle}
                         >
-                            <Text>{nutrition.percentage}%</Text>
+                            <Text>{nutrition.per100g}%</Text>
                         </ProgressCircle>
                         <Text style={styles.nutritionText}>{nutrition.name}</Text>
                     </View>

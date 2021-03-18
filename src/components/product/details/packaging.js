@@ -11,7 +11,7 @@ export default function Packaging(props) {
                     return (
                         <View key={i} style={styles.buttonContainer}>
                             <TouchableOpacity onPress={() => alert('Packaging clicked!')}>
-                                <Text style={styles.packagingTitle}>{APackaging.title}</Text>
+                                <Text style={styles.packagingTitle}>{APackaging.name}</Text>
                             </TouchableOpacity>
                             {/*<Button style={styles.packagingButton} title={APackaging.title}></Button>*/}
                         </View>

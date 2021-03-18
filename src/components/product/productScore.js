@@ -24,7 +24,7 @@ export default class Product extends Component {
             </View>
             <View style={styles.scoreTextContainer}>
                 <View style={styles.scoreMainContainer}>
-                    <Text style={styles.scoreMainScore}>{this.props.score.total}</Text>
+                    <Text style={styles.scoreMainScore}>{this.props.score.total.value}</Text>
                     <Text style={styles.scoreMainTitle}>Score</Text>
                 </View>
                 <View style={styles.scoreSubContainer}>

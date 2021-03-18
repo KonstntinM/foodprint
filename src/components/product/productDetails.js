@@ -8,8 +8,8 @@ export default function productDetails(props) {
 
     return (
         <View style={styles.container}>
-            <Ingredients ingredients={[{title: "Milch"}, {title: "Milchpulver"}, {title: "Milchzucker"}, {title: "Milchkonzentrat"}, {title: "Milchersatzprodukt"}, {title: "Milchzähne"}, {title: "Milchschaum"}, {title: "Milcherzeugnisse"}]}/>
-            <Packaging packaging={[{title: "Hello World"}, {title: "Bello Borld"}, {title: "Cello"}, {title: "Dello Dorld"}]}/>
+            <Ingredients ingredients={props.ingredients}/>
+            <Packaging packaging={props.packaging}/>
         </View>
     );
 }

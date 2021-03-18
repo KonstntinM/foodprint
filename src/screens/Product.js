@@ -12,24 +12,24 @@ export default class Product extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            product: null
         };
     }
 
-    componentDidMount () {
-        var product = this.props.route.params.product;
-        console.log("The product screen was called with the following product.", product)
+    UNSAFE_componentWillMount() {
+        this.state.product = this.props.route.params.product;
+        console.log("The product screen was called with the following product.", this.props.route.params.product)
         return product;
     }
 
     render() {
         return (
-            <ScrollView bounces={false} style={styles.product}>
-                <Header name={"Milk"} category={"some food"} image={"https://cdn.pixabay.com/photo/2016/08/07/15/01/blueberries-1576405_960_720.jpg"} />
+            <ScrollView bounces={false}>
+                <Header name={this.state.product.name} category={this.state.product.categories[0]} image={this.state.product.image}/>
                 <View style={styles.productBody}>
-                    <Score style={styles.productInformation} score={{ total: 500, ingredients: 100, shipping: 200, packaging: 300 }}/>
-                    <Details style={styles.productInformation}/>
-                    <Nutritions style={styles.productInformation}/>
+                    <Score style={styles.productInformation} score={this.state.product.score}/>
+                    <Details style={styles.productInformation} ingredients={this.state.product.ingredients} packaging={this.state.product.packaging}/>
+                    <Nutritions style={styles.productInformation} nutritions={this.state.product.nutritions}/>
                 </View>
                     
                 <Text style={styles.categories}>#vegan #vegtable #Food #usw</Text>
