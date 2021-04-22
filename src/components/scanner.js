@@ -22,12 +22,16 @@ export default function Scanner() {
 
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    productService.getProductByBarcode(data)
+
+    navigation.navigate('Loading');
+    /*var promise = productService.getProductByBarcode(data)
+
+    promise
       .then((product) => {
         navigation.navigate('Product', { product: product });
       })
       .catch((error) => {
-        console.error(error)
+        navigation.navigate('Loading', { error: error });
       })
 
     /*if (product.status && product.status == 404) {

@@ -6,6 +6,7 @@ import HomeScreen from '../screens/Home';
 import HistoryScreen from '../screens/History';
 import SettingsScreen from '../screens/Settings';
 import ProductScreen from '../screens/Product';
+import LoadingScreen from '../screens/Loading'
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export default function navigationContainer () {
             <Stack.Screen name="History" component={HistoryScreen} options={{ headerShown: false }}/>
             <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }}/>
             <Stack.Screen name="Product" component={ProductScreen} options={{ headerShown: false }}/>
+            <Stack.Screen name="Loading" component={LoadingScreen} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </NavigationContainer>
     );
